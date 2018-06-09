@@ -20,8 +20,12 @@ import static se.soderman.simpleblog.constant.Paths.USERS;
 @Path(ADMIN + USERS)
 public class UserController {
 
+    final BlogUserRepository userRepository;
+
     @Autowired
-    BlogUserRepository userRepository;
+    public UserController(BlogUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
