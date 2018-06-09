@@ -1,4 +1,4 @@
-package se.soderman.backend;
+package se.soderman.simpleblog;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
