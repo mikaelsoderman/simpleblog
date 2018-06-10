@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import se.soderman.simpleblog.domain.BlogUser;
 
 @Repository
-public interface BlogUserRepository extends CrudRepository<BlogUser, String> {
+public interface BlogUserRepository extends CrudRepository<BlogUser, Integer> {
+    public BlogUser findByEmail(String email);
 }

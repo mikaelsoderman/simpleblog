@@ -34,10 +34,10 @@ public class BackendConfiguration {
     @PostConstruct
     public void init() {
         BlogUser user = new BlogUser();
-        user.setEmail("hej@hopp.se");
+        user.setEmail("admin@admin.se");
         user.setName("Kalle Kula");
         user.setPassword("Aa123456");
-        user = blogUserRepository.save(user);
+        //user = blogUserRepository.save(user);
 
         Post p = new Post();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -52,6 +52,6 @@ public class BackendConfiguration {
         p.setTitle("This is a title");
         p.setBody("THis is the body");
 
-        postRepository.save(p);
+        //postRepository.save(p);
     }
 }

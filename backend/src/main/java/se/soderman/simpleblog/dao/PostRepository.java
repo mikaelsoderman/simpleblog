@@ -5,6 +5,6 @@ import se.soderman.simpleblog.domain.Post;
 
 import java.util.Date;
 
-public interface PostRepository extends CrudRepository<Post, String> {
+public interface PostRepository extends CrudRepository<Post, Integer> {
     public Iterable<Post> findByDateBetween(Date start, Date end);
 }

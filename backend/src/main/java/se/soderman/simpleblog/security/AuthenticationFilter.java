@@ -27,8 +27,14 @@ public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequ
     @Context
     private ResourceInfo resourceInfo;
 
-    private final MessageSource messageSource;
-    private final SecurityManagerImpl securityManager;
+    private MessageSource messageSource;
+    private SecurityManagerImpl securityManager;
+
+    protected AuthenticationFilter(SecurityManagerImpl securityManager, MessageSource messageSource, ResourceInfo resourceInfo) {
+        this.securityManager = securityManager;
+        this.messageSource = messageSource;
+        this.resourceInfo = resourceInfo;
+    }
 
     @Autowired
     public AuthenticationFilter(SecurityManagerImpl securityManager, MessageSource messageSource) {

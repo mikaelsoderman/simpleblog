@@ -2,18 +2,14 @@ package se.soderman.simpleblog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import se.soderman.simpleblog.dao.PostRepository;
 import se.soderman.simpleblog.dao.PostSearch;
-import se.soderman.simpleblog.domain.BlogUser;
 import se.soderman.simpleblog.domain.Post;
+import se.soderman.simpleblog.exception.NotFoundException;
 import se.soderman.simpleblog.security.SecuredEndpoint;
 
-import javax.annotation.PostConstruct;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -55,8 +51,8 @@ public class PostController {
     @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
     @SecuredEndpoint
-    public Post getAllPosts(@PathParam("id") String id) throws Exception {
-        return postRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+    public Post getAllPosts(@PathParam("id") Integer id) throws Exception {
+        return postRepository.findById(id).orElseThrow(() -> new NotFoundException("Unknown resource", String.valueOf(id)));
     };
 
     @GET
