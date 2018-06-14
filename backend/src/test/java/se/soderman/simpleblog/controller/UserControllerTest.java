@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import se.soderman.simpleblog.BackendApplication;
 import se.soderman.simpleblog.dao.BlogUserRepository;
+import se.soderman.simpleblog.dao.PostRepository;
 import se.soderman.simpleblog.domain.BlogUser;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class UserControllerTest {
 
     @Autowired
     BlogUserRepository userRepository;
+    @Autowired
+    PostRepository postRepository;
 
     private BlogUser adminUser, anotherUser;
     private TestRestTemplate restTemplate = new TestRestTemplate();
@@ -44,6 +47,10 @@ public class UserControllerTest {
 
     @Before
     public void setUp() throws Exception {
+
+        postRepository.deleteAll();
+        userRepository.deleteAll();
+
         String credentials = Base64.encode("testuser@test.se:Qwerty123".getBytes());
         headersWithAuth = new HttpHeaders();
         headersWithAuth.add("Authorization", "Basic"+credentials);
@@ -51,7 +58,6 @@ public class UserControllerTest {
         user.setName("Test User");
         user.setEmail("testuser@test.se");
         user.setPassword("Qwerty123");
-        userRepository.deleteAll();
         adminUser = userRepository.save(user);
         BlogUser user2 = new BlogUser();
         user2.setName("Another User");
