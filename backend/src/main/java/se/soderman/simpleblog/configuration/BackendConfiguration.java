@@ -37,9 +37,9 @@ public class BackendConfiguration {
         user.setEmail("admin@admin.se");
         user.setName("Kalle Kula");
         user.setPassword("Aa123456");
-        //user = blogUserRepository.save(user);
+        user = blogUserRepository.save(user);
 
-        Post p = new Post();
+        Post p1 = new Post();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date d = null;
         try {
@@ -47,11 +47,26 @@ public class BackendConfiguration {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        p.setDate(d);
-        p.setAuthor(user);
-        p.setTitle("This is a title");
-        p.setBody("THis is the body");
+        p1.setDate(d);
+        p1.setAuthor(user);
+        p1.setTitle("This is a title");
+        p1.setBody("This is the body");
+        p1.setImageUrl("https://picsum.photos/600/300/?image=724");
 
-        //postRepository.save(p);
+        Post p = new Post();
+        Date d2 = null;
+        try {
+            d2 = sdf.parse("23/12/2012");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        p.setDate(d2);
+        p.setAuthor(user);
+        p.setTitle("This is another title");
+        p.setBody("This is another body");
+        p.setImageUrl("https://picsum.photos/600/300/?image=542");
+
+        postRepository.save(p);
+        postRepository.save(p1);
     }
 }

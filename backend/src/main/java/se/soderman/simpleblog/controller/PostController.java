@@ -35,7 +35,6 @@ public class PostController {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @SecuredEndpoint
     public Iterable<Post> getAllPosts() throws Exception {
         return postRepository.findAll();
     };
@@ -43,6 +42,7 @@ public class PostController {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON  })
     @Produces({ MediaType.APPLICATION_JSON })
+    @SecuredEndpoint
     public Post createPost(Post post) throws Exception {
         return postRepository.save(post);
     }
@@ -50,15 +50,23 @@ public class PostController {
     @GET
     @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @SecuredEndpoint
-    public Post getAllPosts(@PathParam("id") Integer id) throws Exception {
+    public Post getPost(@PathParam("id") Integer id) throws Exception {
         return postRepository.findById(id).orElseThrow(() -> new NotFoundException("Unknown resource", String.valueOf(id)));
+    };
+
+    @DELETE
+    @Path("/{id}")
+    @Produces({ MediaType.TEXT_PLAIN })
+    @SecuredEndpoint
+    public String deletePost(@PathParam("id") Integer id) throws Exception {
+        Post p = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Unknown resource", String.valueOf(id)));
+        postRepository.delete(p);
+        return String.valueOf(id);
     };
 
     @GET
     @Path("/date/{date}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @SecuredEndpoint
     public Iterable<Post> getAllPostsForDate(@PathParam("date") String date) throws Exception {
         Date d = sdf.parse(date);
         Date end = new Date(d.getTime() + 1000*60*60*24);
@@ -68,7 +76,6 @@ public class PostController {
     @GET
     @Path("/search")
     @Produces({ MediaType.APPLICATION_JSON })
-    @SecuredEndpoint
     public Iterable<Post> search(@QueryParam("query") String query) {
         List searchResults = postSearch.search(query);
         return searchResults;

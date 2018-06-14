@@ -1,16 +1,19 @@
 package se.soderman.simpleblog.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import se.soderman.simpleblog.dao.BlogUserRepository;
 import se.soderman.simpleblog.domain.BlogUser;
+import se.soderman.simpleblog.exception.AuthenticationException;
 import se.soderman.simpleblog.security.SecuredEndpoint;
 
-import javax.validation.ConstraintViolationException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import static se.soderman.simpleblog.constant.Paths.ADMIN;
 import static se.soderman.simpleblog.constant.Paths.USERS;
@@ -20,11 +23,13 @@ import static se.soderman.simpleblog.constant.Paths.USERS;
 @Path(ADMIN + USERS)
 public class UserController {
 
-    final BlogUserRepository userRepository;
+    private final BlogUserRepository userRepository;
+    private final MessageSource messageSource;
 
     @Autowired
-    public UserController(BlogUserRepository userRepository) {
+    public UserController(BlogUserRepository userRepository, MessageSource messageSource) {
         this.userRepository = userRepository;
+        this.messageSource = messageSource;
     }
 
     @GET
@@ -39,6 +44,25 @@ public class UserController {
     @Produces({ MediaType.APPLICATION_JSON })
     public BlogUser createUser(BlogUser user) throws Exception {
         return userRepository.save(user);
+    }
+
+    @POST
+    @Path("/login")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON })
+    public BlogUser login(String json) throws Exception {
+
+        Map<String, String> response = new ObjectMapper().readValue(json, HashMap.class);
+        String email = response.get("email");
+        String password = response.get("password");
+        BlogUser user = userRepository.findByEmail(email);
+        boolean isAuthOk = user != null && user.getEmail().equals(email) && user.getPassword().equals(password);
+
+        if (isAuthOk) {
+            return user;
+        } else {
+            throw new AuthenticationException(messageSource.getMessage("login.failed", null, Locale.getDefault()), email);
+        }
     }
 
 }
