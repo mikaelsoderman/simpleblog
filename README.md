@@ -27,6 +27,11 @@
  search. The fields to be included in the search index are annotated with
  `@Field(termVector = TermVector.YES)`
  
+ Data is stored in an embedded H2 database by using JPA. Base classes
+ are BlogUser and Post. The database not persisted between restarts
+ and is re-initialised upon each restart of the application. By default
+ a BlogUser is created and database is initialised with two blog posts.
+ 
  User management is not implemented and needs to be implemented to 
  achieve features such as
  - functionality for adding and removing users
@@ -98,7 +103,7 @@ project:
  and server interaction are performed with http requests through
  using the library vue-resource.
  
- The login mechanism for the application is simple based upon sending
+ The login mechanism for the application is simple and based upon sending
  user credentials (email and password) over http. Users can log in by
  using a form which will generate the http call to the server. When
  the user is logged in the application will utilise the vue.js local 
@@ -115,30 +120,3 @@ project:
  adding new posts. The form validates the input values. With one
  exception, there is no special validation in the form for asserting 
  that the supplied url is for an actual image. 
- 
- The frontend can be built and delivered along with the backend application
- or be served in development mode as a standalone applcication. See
- below for details on serving the frontend.
- 
- ``` bash
- # install dependencies
- npm install
- 
- # serve with hot reload at localhost:8080
- npm run dev
- 
- # build for production with minification
- npm run build
- 
- # build for production and view the bundle analyzer report
- npm run build --report
- 
- # run unit tests
- npm run unit
- 
- # run e2e tests
- npm run e2e
- 
- # run all tests
- npm test
- ```

@@ -49,8 +49,8 @@ public class BackendConfiguration {
         }
         p1.setDate(d);
         p1.setAuthor(user);
-        p1.setTitle("This is a title");
-        p1.setBody("This is the body");
+        p1.setTitle("Lorem ipsum dolor sit amet");
+        p1.setBody("Sed venenatis convallis justo, vel fringilla libero. Curabitur in varius lorem, in hendrerit neque. Nunc lobortis pretium justo pretium vulputate. ");
         p1.setImageUrl("https://picsum.photos/600/300/?image=724");
 
         Post p = new Post();
@@ -62,8 +62,8 @@ public class BackendConfiguration {
         }
         p.setDate(d2);
         p.setAuthor(user);
-        p.setTitle("This is another title");
-        p.setBody("This is another body");
+        p.setTitle("Duis vel tristique purus");
+        p.setBody("Donec aliquet mauris dui. Nullam accumsan aliquet nisi eget laoreet. Etiam blandit tempor facilisis. Nulla quis hendrerit magna. Donec posuere risus dictum dolor volutpat, vel pharetra nisi aliquet. Nunc condimentum feugiat velit, et finibus nibh accumsan ut. Etiam ac efficitur sem. Sed eget cursus lacus, at tempus magna. ");
         p.setImageUrl("https://picsum.photos/600/300/?image=542");
 
         postRepository.save(p);
