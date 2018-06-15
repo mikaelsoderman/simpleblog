@@ -53,7 +53,7 @@ export default {
 }
 
 function loginRequest (http, email, pass, cb) {
-  http.post('http://localhost:8080/api/admin/users/login', {email: email, password: pass}).then(response => {
+  http.post('api/admin/users/login', {email: email, password: pass}).then(response => {
     // eslint-disable-next-line
     cb({
       authenticated: true,

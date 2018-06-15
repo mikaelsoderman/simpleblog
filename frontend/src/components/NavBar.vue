@@ -52,7 +52,7 @@ export default {
     },
     performSearch (query) {
       this.searchquery = query
-      this.$http.get('http://localhost:8080/api/admin/posts/search', {params: {query: query}}).then(response => {
+      this.$http.get('api/admin/posts/search', {params: {query: query}}).then(response => {
         this.$parent.searchresult = response.body
         if (typeof this.$parent.searchresult === 'undefined' || this.$parent.searchresult.length === 0) {
           this.showSearchAlert('No hits found')

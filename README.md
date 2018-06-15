@@ -33,24 +33,49 @@
  - maintaining hierarchies of users
  - manage individual blogs
  
+ ###### Deployment with web application platform
+ 
+ The application is expected to be deployed in a web application platform and is tested with
+ Tomcat version 9.0.8. It can also be deployed as a standalone Spring boot application with
+ embedded Tomcat, see below for instructions on how to do that.
+ 
+ To build and deploy the application perform the command in the root directory of 
+ the project:
+ 
+ ```
+  mvn clean install
+   ```
+ 
+ Then copy the file backend/target/backend.war to the webapps directory in the Tomcat installation.
+ 
+ Launch a web browser and open the following url: http://localhost:8080/backend
+ 
+ 
  ###### Standalone deployment
  
- The application can be executed either as a standalone pure Springboot
- application or as a war package for deployment inside a web application
- platform such as Tomcat.
- 
- To run as a standalone application perform the following steps:
+ To deploy the application as a standalone Springboot application a minor change is needed in the
+ source code. Open the file frontend/config/index.js. Change row 53 from:
+  
+```
+assetsPublicPath: '/backend',
+```
+
+to
+  
+```
+assetsPublicPath: '/',
+```
+
+Then build the application by performing the following steps from the root directory of the
+project:
  
  ```
  mvn clean install
  cd backend/target
  java -jar simpleblog-0.0.1-SNAPSHOT.war
   ```
- After the Springboot application has started, launch a web browser and 
- open the url http://localhost:8080/
- 
- ###### Deployment with web application platform
- 
+ After the Springboot application has started, launch a web browser and open the 
+ url http://localhost:8080/
  
  
  ##### Frontend

@@ -130,7 +130,7 @@ export default {
       this.searchresult = newList
     },
     loadPosts (postid) {
-      this.$http.get('http://localhost:8080/api/admin/posts/').then(response => {
+      this.$http.get('api/admin/posts/').then(response => {
         // get body data
         this.updatePosts(response.body)
         this.updateSearchResult('')
@@ -152,7 +152,7 @@ export default {
       this.editedpost.id = this.posts[itemindex].id
     },
     deleteItem (idToDelete) {
-      this.$http.delete('http://localhost:8080/api/admin/posts/' + idToDelete, {headers: {'Authorization': 'Basic ' + this.$parent.token}}).then(response => {
+      this.$http.delete('api/admin/posts/' + idToDelete, {headers: {'Authorization': 'Basic ' + this.$parent.token}}).then(response => {
         this.posts = this.removePostFromList(idToDelete, this.posts)
         this.searchresult = this.removePostFromList(idToDelete, this.searchresult)
 
@@ -186,7 +186,7 @@ export default {
         author: JSON.parse(this.loggedInUser)
       }
 
-      this.$http.post('http://localhost:8080/api/admin/posts/', newpost).then(response => {
+      this.$http.post('api/admin/posts/', newpost).then(response => {
         this.showAlert = false
         this.editedpost.date = ''
         this.editedpost.title = ''
