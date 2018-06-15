@@ -24,11 +24,11 @@ public class Post {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date date;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 500)
     @Field(termVector = TermVector.YES)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 3000)
     @Field(termVector = TermVector.YES)
     private String body;
 
