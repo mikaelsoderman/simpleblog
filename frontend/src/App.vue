@@ -1,13 +1,19 @@
 <template>
   <div id="app">
 
-    <b-container class="bv-example-row">
+    <b-container>
       <b-row>
         <b-col>
           <h1>Picture Blog</h1>
         </b-col>
+        <b-navbar v-if="loggedIn" type="light" variant="faded">
+          <h5 id="welcome-msg">Welcome {{ username }}! </h5>
+            <router-link v-if="loggedIn" to="/logout">
+                <b-button variant="danger">Log out</b-button>
+            </router-link>
+        </b-navbar>
       </b-row>
-      <b-row>
+      <b-row id="main-content">
         <b-col v-if="this.searchresult.length > 0">
           <b-navbar type="light" variant="light">
             <h5>Search result for query {{ this.searchquery }}</h5>
@@ -68,20 +74,6 @@
         </b-col>
       </b-row>
     </b-container>
-
-    <ul>
-      <li>
-        <router-link v-if="loggedIn" to="/logout">Log out</router-link>
-        <router-link v-if="!loggedIn" to="/login">Log in</router-link>
-      </li>
-    </ul>
-    <template v-if="$route.matched.length">
-      <router-view></router-view>
-    </template>
-    <template v-else>
-      <p>You are logged {{ loggedIn ? 'in' : 'out' }} {{ token }}</p>
-    </template>
-
   </div>
 </template>
 
@@ -186,7 +178,7 @@ export default {
     savePost () {
       var blogDate = moment(this.editedpost.date)
       var newpost = {
-        id: this.editedpost.postid,
+        id: this.editedpost.id,
         date: blogDate.format('YYYY-MM-DD HH:mm'),
         title: this.editedpost.title,
         body: this.editedpost.body,
@@ -233,8 +225,24 @@ var getPostIndex = function (postId, list) {
 
 </script>
 <style>
-h1 {
-  text-align: center;
-  visibility: hidden;
-}
+  body{
+    background:url('https://picsum.photos/1600/1200/?rand') no-repeat center center;
+    min-height:100%;
+    background-size:cover;
+  }
+
+  div.row {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 25px 30px 5px 30px;
+  }
+
+  div#main-content {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding-bottom: 40px;
+    padding-top: 5px;
+  }
+
+  #welcome-msg {
+    margin-right: 30px;
+  }
 </style>

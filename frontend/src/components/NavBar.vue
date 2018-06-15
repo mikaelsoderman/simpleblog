@@ -1,7 +1,6 @@
 <template>
 <div>
   <b-navbar type="light" variant="light">
-    <h5>Welcome! Log in below</h5>
     <b-navbar-nav class="ml-auto">
 
       <b-nav-form @submit="onSearch" >
@@ -67,8 +66,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

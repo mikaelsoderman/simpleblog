@@ -1,6 +1,6 @@
-# frontend
+# SimpleBlog Frontend
 
-> A simple blog project
+> Frontend for the SimpleBlog picture blog
 
 ## Build Setup
 

@@ -36,7 +36,7 @@ export default {
   name: 'login',
   data () {
     return {
-      email: 'joe@example.com',
+      email: 'user@enigio.com',
       pass: '',
       error: false,
       errors: [],
@@ -60,7 +60,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .error {
     color: red;
   }
