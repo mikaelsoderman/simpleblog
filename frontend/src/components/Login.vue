@@ -36,7 +36,7 @@ export default {
   name: 'login',
   data () {
     return {
-      email: 'user@enigio.com',
+      email: 'user@test.com',
       pass: '',
       error: false,
       errors: [],

@@ -34,7 +34,7 @@ public class BackendConfiguration {
     @PostConstruct
     public void initialDataSetup() {
         BlogUser user = new BlogUser();
-        user.setEmail("user@enigio.com");
+        user.setEmail("user@test.com");
         user.setName("Enigio User");
         user.setPassword("12345Qw");
         user = blogUserRepository.save(user);

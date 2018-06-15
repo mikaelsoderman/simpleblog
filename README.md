@@ -42,13 +42,20 @@
  To build and deploy the application perform the command in the root directory of 
  the project:
  
- ```
-  mvn clean install
-   ```
+```
+mvn clean install
+```
  
  Then copy the file backend/target/backend.war to the webapps directory in the Tomcat installation.
  
  Launch a web browser and open the following url: http://localhost:8080/backend
+ 
+ The ability to add new users is not included in the current version of
+ the application. So in order to log in use the following credentials:
+ ```
+Username: user@test.com
+Password: 12345Qw
+ ```
  
  
  ###### Standalone deployment
@@ -72,11 +79,17 @@ project:
  ```
  mvn clean install
  cd backend/target
- java -jar simpleblog-0.0.1-SNAPSHOT.war
+ java -jar backend.war
   ```
  After the Springboot application has started, launch a web browser and open the 
  url http://localhost:8080/
  
+  The ability to add new users is not included in the current version of
+  the application. So in order to log in use the following credentials:
+  ```
+ Username: user@test.com
+ Password: 12345Qw
+  ```
  
  ##### Frontend
  
