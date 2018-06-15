@@ -24,19 +24,19 @@ public class PostController {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private final PostRepository postRepository;
 
-    @Autowired
-    private PostSearch postSearch;
+    private final PostSearch postSearch;
 
 
     @Autowired
-    public PostController(PostRepository postRepository) {
+    public PostController(PostRepository postRepository, PostSearch postSearch) {
         this.postRepository = postRepository;
+        this.postSearch = postSearch;
     }
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     public Iterable<Post> getAllPosts() throws Exception {
-        return postRepository.findAll();
+        return postRepository.findAllByOrderByDateDesc();
     };
 
     @POST

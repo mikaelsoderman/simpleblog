@@ -1,6 +1,5 @@
 package se.soderman.simpleblog.dao;
 
-import org.apache.catalina.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.lucene.search.Query;

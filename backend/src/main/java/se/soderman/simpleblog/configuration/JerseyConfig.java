@@ -15,7 +15,6 @@ public class JerseyConfig extends ResourceConfig {
 
         register(UserController.class);
         register(AuthenticationFilter.class);
-        //register(CORSResponseFilter.class);
 
         property("jersey.config.server.provider.packages", "se.soderman.simpleblog");
     }

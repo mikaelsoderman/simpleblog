@@ -32,18 +32,18 @@ public class BackendConfiguration {
     private PostRepository postRepository;
 
     @PostConstruct
-    public void init() {
+    public void initialDataSetup() {
         BlogUser user = new BlogUser();
-        user.setEmail("admin@admin.se");
-        user.setName("Kalle Kula");
-        user.setPassword("Aa123456");
+        user.setEmail("user@enigio.com");
+        user.setName("Enigio User");
+        user.setPassword("12345Qw");
         user = blogUserRepository.save(user);
 
         Post p1 = new Post();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date d = null;
         try {
-            d = sdf.parse("21/12/2012");
+            d = sdf.parse("21/05/2018 13:40");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class BackendConfiguration {
         Post p = new Post();
         Date d2 = null;
         try {
-            d2 = sdf.parse("23/12/2012");
+            d2 = sdf.parse("22/05/2018 14:00");
         } catch (ParseException e) {
             e.printStackTrace();
         }

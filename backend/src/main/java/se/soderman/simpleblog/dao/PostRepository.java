@@ -7,4 +7,5 @@ import java.util.Date;
 
 public interface PostRepository extends CrudRepository<Post, Integer> {
     public Iterable<Post> findByDateBetween(Date start, Date end);
+    public Iterable<Post> findAllByOrderByDateDesc();
 }

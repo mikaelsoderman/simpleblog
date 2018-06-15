@@ -21,17 +21,17 @@ public class ErrorMessage implements Serializable {
         private Integer httpStatus;
         private List<String> messages = new ArrayList<>();
 
-        public Builder setHttpStatus(Integer httpStatus) {
+        Builder setHttpStatus(Integer httpStatus) {
             this.httpStatus = httpStatus;
             return this;
         }
 
-        public Builder setMessages(List<String> messages) {
+        Builder setMessages(List<String> messages) {
             this.messages = messages;
             return this;
         }
 
-        public Builder addMessage(String message) {
+        Builder addMessage(String message) {
             this.messages.add(message);
             return this;
         }

@@ -35,14 +35,14 @@ public class UserController {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @SecuredEndpoint
-    public Iterable<BlogUser> getAllUsers() throws Exception {
+    public Iterable<BlogUser> getAllUsers() {
         return userRepository.findAll();
-    };
+    }
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON  })
     @Produces({ MediaType.APPLICATION_JSON })
-    public BlogUser createUser(BlogUser user) throws Exception {
+    public BlogUser createUser(BlogUser user) {
         return userRepository.save(user);
     }
 

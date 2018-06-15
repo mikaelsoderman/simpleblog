@@ -1,13 +1,9 @@
 package se.soderman.simpleblog.controller;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-import org.json.JSONObject;
+import org.glassfish.jersey.internal.util.Base64;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,17 +13,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import se.soderman.simpleblog.BackendApplication;
 import se.soderman.simpleblog.dao.BlogUserRepository;
 import se.soderman.simpleblog.dao.PostRepository;
 import se.soderman.simpleblog.domain.BlogUser;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BackendApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -51,7 +43,7 @@ public class UserControllerTest {
         postRepository.deleteAll();
         userRepository.deleteAll();
 
-        String credentials = Base64.encode("testuser@test.se:Qwerty123".getBytes());
+        String credentials = new String(Base64.encode("testuser@test.se:Qwerty123".getBytes()));
         headersWithAuth = new HttpHeaders();
         headersWithAuth.add("Authorization", "Basic"+credentials);
         BlogUser user = new BlogUser();
@@ -83,7 +75,7 @@ public class UserControllerTest {
 
     @Test
     public void getAllUsers_ShouldReturnStatusCode401_WhenAuthHeadersContainWrongPassword() throws Exception {
-        String credentials = Base64.encode("testuser@test.se:qwerty123".getBytes());
+        String credentials = new String(Base64.encode("testuser@test.se:qwerty123".getBytes()));
         HttpHeaders headersWithWrongPass = new HttpHeaders();
         headersWithWrongPass.add("Authorization", "Basic"+credentials);
         HttpEntity<String> entity = new HttpEntity<>(null, headersWithWrongPass);
@@ -100,7 +92,7 @@ public class UserControllerTest {
 
     @Test
     public void getAllUsers_ShouldReturnStatusCode401_WhenAuthHeadersContainUnknownUser() throws Exception {
-        String credentials = Base64.encode("no.such.user@test.se:qwerty123".getBytes());
+        String credentials = new String(Base64.encode("no.such.user@test.se:qwerty123".getBytes()));
         HttpHeaders headersWithWrongPass = new HttpHeaders();
         headersWithWrongPass.add("Authorization", "Basic"+credentials);
         HttpEntity<String> entity = new HttpEntity<>(null, headersWithWrongPass);

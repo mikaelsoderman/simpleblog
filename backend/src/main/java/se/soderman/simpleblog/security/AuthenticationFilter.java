@@ -16,7 +16,6 @@ import javax.ws.rs.ext.Provider;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.StringTokenizer;
 
 @Provider
 @Component
